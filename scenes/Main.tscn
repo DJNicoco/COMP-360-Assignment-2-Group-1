@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhieq046ow73x"]
+
+[ext_resource type="PackedScene" uid="uid://c5wqta71d5haq" path="res://scenes/Road.tscn" id="1_rvslj"]
+[ext_resource type="Script" uid="uid://b62pxevai5olt" path="res://scripts/camera_3d.gd" id="2_0bbpv"]
+
+[sub_resource type="Curve3D" id="Curve3D_dddiq"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 5, 0, 0, 0, 0, 0, 0, 20, 0, -5, 0, 0, 0, 0, 0, 0, 30, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[node name="TestMain" type="Node3D"]
+
+[node name="Track" type="Path3D" parent="."]
+curve = SubResource("Curve3D_dddiq")
+
+[node name="Road" parent="." instance=ExtResource("1_rvslj")]
+path = NodePath("../Track")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("track")]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 15, -30)
+current = true
+script = ExtResource("2_0bbpv")
+track = NodePath("../Track")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8660254, -0.43301272, 0.24999999, 0, 0.49999997, 0.86602545, -0.5, -0.75, 0.43301266, 0, 0, 0)
